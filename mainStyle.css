@@ -1,3 +1,7 @@
+@import "node_modules/normalize.css/normalize.css";
+*:focus {
+    outline: none;
+}
 @font-face {
     font-family: "ubunto r";
     font-style: normal;
@@ -16,6 +20,17 @@
     font-weight: 400;
     src: url("fonts/Ubuntu-Light.ttf");
 }
+h1, h2, h3{
+    text-align: center;
+}
 h1, h2, h3, p {
-    font-family: 'ubunto';
+    font-family: 'ubunto r';
+}
+input{
+    border: 2px solid transparent;
+    padding: 1px;
+}
+input:focus{
+    border: 2px solid transparent;
+    padding: 1px;
 }
