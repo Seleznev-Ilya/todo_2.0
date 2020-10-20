@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "ubunto r";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/Ubuntu-Regular.ttf");
+}
+@font-face {
+    font-family: "ubunto i";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/Ubuntu-Italic.ttf");
+}
+@font-face {
+    font-family: "ubunto l";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/Ubuntu-Light.ttf");
+}
+h1, h2, h3, p {
+    font-family: 'ubunto';
+}
