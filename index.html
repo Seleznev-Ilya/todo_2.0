@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <title>todoshka :)</title>
 </head>
 <body>
@@ -11,9 +12,21 @@
 </header>
 <section class="main">
     <div class="todo">
-        <input type="text" class="todo-input>
+        <div class="todo-arrow">
+            <div class="arrow-wrapper hide"><i class='fas fa-clone'></i></div>
+            <div class="arrow-wrapper"><i class='far fa-clone'></i></div>
+        </div>
+        <form id="todo" onsubmit="enterToDO();return false">
+            <input type="text" placeholder="What need to be done?" id="todo-input">
+        </form>
+    </div>
+    <div class="items-wrapper">
+    </div>
+    <div class="filters">
     </div>
 </section>
-<script src="script.js"></script>
+<script src="scripts/store.js"></script>
+<script src="scripts/action.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>
