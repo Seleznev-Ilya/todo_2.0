@@ -5,10 +5,9 @@ let itemsWrapper = document.querySelector('.items-wrapper');
 function getStoreValue() {
     if (localStorage.getItem('store') === null) {
         setStoreArr();
-        // return getStoreValue();
         return JSON.parse(localStorage.getItem('store'));
     } else {
-        concatNewAndOldStoreArr() // run func (new  + ald )
+        concatNewAndOldStoreArr();// run func (new  + ald ) *************** set apart of getStoreValue
         return JSON.parse(localStorage.getItem('store'));
     }
 }
@@ -47,7 +46,7 @@ function createArrWithNewItem(state) {// create new array or concat (new + ald )
 }
 
 function getValueFromToDo() {
-    let valueToDo = todoValue.value;
+    let valueToDo = todoValue.value.trim();
     todoValue.value = '';
     return valueToDo;
 }
