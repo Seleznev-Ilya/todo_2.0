@@ -2,15 +2,17 @@ let todoValue = document.querySelector('#todo-input');
 let arrow = document.querySelector('.todo-arrow');
 let itemsWrapper = document.querySelector('.items-wrapper');
 
-function getStoreValue() {
-    if (localStorage.getItem('store') === null) {
-        setStoreArr();
-        return JSON.parse(localStorage.getItem('store'));
-    } else {
-        concatNewAndOldStoreArr();// run func (new  + ald ) *************** set apart of getStoreValue
-        return JSON.parse(localStorage.getItem('store'));
-    }
+
+function getStoreValue() { //get and add first new one item
+    setStoreArr();
+    return JSON.parse(localStorage.getItem('store'));
 }
+
+function setStoreValue() { // set and get new store
+    concatNewAndOldStoreArr();// run func (new  + ald ) *************** set apart of getStoreValue
+    return JSON.parse(localStorage.getItem('store'));
+}
+
 
 function setStoreArr() { //set array in localStore
     let arrayStoreList = JSON.stringify(createArrWithNewItem(false));
@@ -22,12 +24,13 @@ function concatNewAndOldStoreArr() { //concatenation Old array from localStore w
     localStorage.setItem('store', arrayStoreList);  //log to store
 }
 
+
 function createArrWithNewItem(state) {// create new array or concat (new + ald ) depending on STATE then return array store
     let newArr = [];
 
     function returnNewItem() {
 
-        function Item(value) { //todo: create new obj
+        function Item(value) { // create new obj
             this.value = value;
             this.checked = false;
         }
@@ -35,14 +38,19 @@ function createArrWithNewItem(state) {// create new array or concat (new + ald )
         return new Item(getValueFromToDo());//value, id, condition item (def)
     }
 
-    newArr.push(returnNewItem());  //todo: add obj into array
-    //todo: concatenation here old and new
+    newArr.push(returnNewItem());  //add obj into array
+    // concatenation here old and new
     if (state) {
         let arrStore = JSON.parse(localStorage.getItem('store'));
         return arrStore.concat(newArr);
     } else {
         return newArr;
     }
+}
+function changeStoreArr(){
+    // todo delete one value
+    // todo change value
+    // todo change checked
 }
 
 function getValueFromToDo() {
