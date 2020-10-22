@@ -1,6 +1,8 @@
 let todoValue = document.querySelector('#todo-input');
 let arrow = document.querySelector('.todo-arrow');
+let main = document.querySelector('.main');
 let itemsWrapper = document.querySelector('.items-wrapper');
+let todo = document.querySelector('.todo');
 
 
 function getStoreValue() { //get and add first new one item
@@ -47,14 +49,35 @@ function createArrWithNewItem(state) {// create new array or concat (new + ald )
         return newArr;
     }
 }
-function changeStoreArr(){
-    // todo delete one value
-    // todo change value
-    // todo change checked
-}
 
 function getValueFromToDo() {
     let valueToDo = todoValue.value.trim();
     todoValue.value = '';
     return valueToDo;
+}
+
+    // CHANGE STORE by interface
+function changeStoreArr(){
+    // todo delete one value
+    // todo change value
+
+}
+function changeChecked(state){
+    let store = JSON.parse(localStorage.getItem('store'));
+
+        if (store[state - 1].checked === true){
+            store[state - 1].checked = false;
+        } else {
+            store[state - 1].checked = true;
+        }
+
+    return store;
+}
+
+function deleteItemFromStore(state){
+    let store = JSON.parse(localStorage.getItem('store'));
+
+   store.splice(state - 1, 1);
+
+    return store;
 }
