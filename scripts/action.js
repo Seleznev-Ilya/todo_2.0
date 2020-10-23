@@ -1,16 +1,3 @@
-function Counter() {
-    let count = 0;
-
-    this.up = function () {
-        return ++count;
-    };
-    this.down = function () {
-        return --count;
-    };
-}
-
-let counter = new Counter();
-
 function enterToDO() {
     if (todoValue.value.trim() !== '') {
 
@@ -40,22 +27,21 @@ itemsWrapper.addEventListener('click', function (event) {
     if (target.trim() !== '') {
         localStorage.setItem('store', JSON.stringify(changeChecked(target)));
     }
-    // console.log(e);
     switchCheckbox(e);
     deleteItem(e);
-
 });
 
 function switchCheckbox(e) {
     try {
         let condition = e.parentNode.firstElementChild.nextElementSibling.children;
-        console.log(e.parentNode);
         if (e.parentNode.className === "checkbox") {
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
         }
-    } catch {}
+    } catch {
+    }
+    numberItemsShow();
 }
 
 function deleteItem(e) {
@@ -70,3 +56,53 @@ function deleteItem(e) {
         renderItems(JSON.parse(localStorage.getItem('store')));
     }
 }
+
+itemsWrapper.addEventListener('dblclick', function (event) {
+    let e = event.target;
+    if (e.className === 'card-p') {
+        swapCardToInput(e);
+    }
+});
+
+function swapCardToInput(e) {
+    inputItem = document.querySelector(`.${Object.keys(e.dataset)[0]}`);
+    card = document.getElementById(`${e.id}`);
+
+    inputItem.classList.toggle('hide');
+    inputItem.focus();
+    card.parentNode.classList.toggle('hide');
+
+    inputItem.addEventListener('keydown', function (event) {
+        if (event.code === 'Enter') {
+            inputItem.onblur();
+        }
+    });
+
+    inputItem.onblur = function () {
+
+        let target = inputItem.className.slice(inputItem.className.lastIndexOf('t') + 1);
+        let inputNewValue = inputItem.value;
+
+        localStorage.setItem('store', JSON.stringify(editItem(target, inputNewValue)));
+        renderItems(JSON.parse(localStorage.getItem('store')));
+
+        inputItem.classList.toggle('hide');
+        card.parentNode.classList.toggle('hide');
+    }
+}
+
+arrow.addEventListener('click', () => {
+    localStorage.setItem('store', JSON.stringify(selectAllItems()));
+    renderItems(JSON.parse(localStorage.getItem('store')));
+})
+
+clear.addEventListener('click', () => {
+    if (clearAllCompleted().length !== 0){
+        localStorage.setItem('store', JSON.stringify(clearAllCompleted()));
+        renderItems(JSON.parse(localStorage.getItem('store')));
+    } else {
+        delete localStorage.store;
+        renderItems(JSON.parse(localStorage.getItem('store')));
+    }
+
+})

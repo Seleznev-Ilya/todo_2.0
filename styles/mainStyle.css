@@ -1,20 +1,5 @@
 @import "node_modules/normalize.css/normalize.css";
-
-*:focus {
-    outline: none;
-}
-
-.hide {
-    display: none;
-}
-
-.transition {
-    transition: .7s ease;
-}
-
-.shadowDown {
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-}
+@import "style.css";
 
 @font-face {
     font-family: "ubunto r";
@@ -101,5 +86,33 @@ i {
 }
 
 input[type=checkbox] {
+    display: none;
+}
+.item{
+    overflow: hidden;
+}
+.item input{
+    box-shadow: inset 0 0 4px 4px rgba(0,0,0,.2);
+    font-size: 16px;
+    font-family: 'ubunto r';
+    margin: 0 0 0  30px;
+    min-height: 44px;
+    width: -webkit-fill-available;
+    padding-left: 8px;
+}
+
+*:focus {
+    outline: none;
+}
+
+.transition {
+    transition: .7s ease;
+}
+
+.shadowDown {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 2px;
+}
+.hide {
     display: none;
 }

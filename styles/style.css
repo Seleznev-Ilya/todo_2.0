@@ -1,4 +1,3 @@
-@import "mainStyle.css";
 
 .main {
     margin: 0 auto;
@@ -49,6 +48,8 @@
 }
 
 
-
+/*.hide {*/
+/*    display: none;*/
+/*}*/
 
 
