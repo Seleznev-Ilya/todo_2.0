@@ -6,6 +6,7 @@ let todo = document.querySelector('.todo');
 let filters = document.querySelector('.filters');
 let clear = document.querySelector('.clear');
 let numItems = document.querySelector('.numItems');
+let subFilters = document.querySelector('.subFilters');
 
 
 
@@ -37,7 +38,7 @@ function createArrWithNewItem(state) {// create new array or concat (new + ald )
     function returnNewItem() {
 
         function Item(value) { // create new obj
-            // this.id = new Date().getTime();
+            this.id = new Date().getTime();
             this.value = value;
             this.checked = false;
         }

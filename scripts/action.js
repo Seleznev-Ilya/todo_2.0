@@ -97,7 +97,7 @@ arrow.addEventListener('click', () => {
 })
 
 clear.addEventListener('click', () => {
-    if (clearAllCompleted().length !== 0){
+    if (clearAllCompleted().length !== 0) {
         localStorage.setItem('store', JSON.stringify(clearAllCompleted()));
         renderItems(JSON.parse(localStorage.getItem('store')));
     } else {
@@ -105,4 +105,17 @@ clear.addEventListener('click', () => {
         renderItems(JSON.parse(localStorage.getItem('store')));
     }
 
+})
+
+subFilters.addEventListener('click', (event) => {
+    let e = event.target
+    console.log(e);
+    // for (let key of e.children){
+    //     key.children.classList.remove('clearActive');
+    // }
+    console.log(e.parentNode.parentNode.className, e.tagName );
+    // if (e.tagName === 'P'){
+        e.classList.add('clearActive'); /****add tension****/
+
+    // }
 })
