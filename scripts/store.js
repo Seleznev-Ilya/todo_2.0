@@ -92,6 +92,7 @@ function editItem(state, value) {
 }
 
 function selectAllItems() {
+    let condition = arrow.children;
     let store = JSON.parse(localStorage.getItem('store'));
     let boolean = store.find(item => item.checked === false);
     if (boolean) {
@@ -100,13 +101,27 @@ function selectAllItems() {
                 item.checked = true;
             }
         })
+        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) !== searchNumberOfItems(false)){
+            for (let key of condition) {
+                key.classList.toggle('hide');
+            }
+        }
+
     } else {
         store.forEach((item) => {
             if (item.checked === true){
                 item.checked = false;
             }
         })
+        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) === searchNumberOfItems(false)){
+            for (let key of condition) {
+                key.classList.toggle('hide');
+            }
+        }
     }
+
+
+
 
     return store;
 }

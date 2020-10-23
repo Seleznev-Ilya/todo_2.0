@@ -1,6 +1,7 @@
 if (localStorage.getItem('store') !== null) {
     changeArrowToDoShow();
     renderItems(JSON.parse(localStorage.getItem('store')));
+
 }
 
 function renderItems(storeValue) {
@@ -10,9 +11,11 @@ function renderItems(storeValue) {
     let conditionCheckboxTrue;
     let conditionCheckboxFalse;
     filters.classList.add('hide');
+    changeArrowToDoHide();
     try {
         if (storeValue.length !== 0) {
             filters.classList.remove('hide');
+            changeArrowToDoShow();
             for (let key of storeValue) {
                 number += 1;
 
