@@ -116,3 +116,6 @@ input[type=checkbox] {
 .hide {
     display: none;
 }
+span{
+    font-weight: bold;
+}

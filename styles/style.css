@@ -62,4 +62,15 @@ p, .card-p{
 /*    display: none;*/
 /*}*/
 
-
+@media (max-width: 550px) {
+    .main{
+        margin: 10px;
+    }
+    .subFilters, .filters{
+        line-height: 1px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+    }
+}
