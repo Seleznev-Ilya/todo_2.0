@@ -30,11 +30,11 @@
 .filters{
     padding: 0 5px;
 }
-.subFilters div{
+.subFilters {
     margin: 0 10px;
     /*border: 1px solid orange;*/
 }
-.subFilters div p{
+.subFilters  p{
     padding: 2px;
     border-radius: 5px;
     border: 2px solid transparent;
@@ -44,7 +44,7 @@
     padding: 4px;
 }
 
- .subFilters div p:hover{
+ .subFilters  p:hover{
     border: 2px solid rgba(242, 120, 75, .2);
 }
 
@@ -55,7 +55,7 @@ p, .card-p{
     padding-bottom: 0;
     border-bottom: 2px solid rgba(0,0,0,.2);
 }
-.clearActive{
+.subFilters  p.clearActive{
     border: 2px solid rgba(242, 120, 75, .2);
 }
 /*.hide {*/

@@ -67,11 +67,7 @@ function getValueFromToDo() {
 
 function changeChecked(state) {
     let store = JSON.parse(localStorage.getItem('store'));
-    if (store[state - 1].checked === true) {
-        store[state - 1].checked = false;
-    } else {
-        store[state - 1].checked = true;
-    }
+    store[state - 1].checked = store[state - 1].checked !== true;
     return store;
 }
 
@@ -101,7 +97,7 @@ function selectAllItems() {
             if (item.checked === false){
                 item.checked = true;
             }
-        })
+        });
         if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) !== searchNumberOfItems(false)){
             for (let key of condition) {
                 key.classList.toggle('hide');
@@ -113,16 +109,13 @@ function selectAllItems() {
             if (item.checked === true){
                 item.checked = false;
             }
-        })
+        });
         if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) === searchNumberOfItems(false)){
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
         }
     }
-
-
-
 
     return store;
 }

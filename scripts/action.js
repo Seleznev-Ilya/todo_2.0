@@ -65,8 +65,8 @@ itemsWrapper.addEventListener('dblclick', function (event) {
 });
 
 function swapCardToInput(e) {
-    inputItem = document.querySelector(`.${Object.keys(e.dataset)[0]}`);
-    card = document.getElementById(`${e.id}`);
+    let inputItem = document.querySelector(`.${Object.keys(e.dataset)[0]}`);
+    let card = document.getElementById(`${e.id}`);
 
     inputItem.classList.toggle('hide');
     inputItem.focus();
@@ -94,7 +94,7 @@ function swapCardToInput(e) {
 arrow.addEventListener('click', () => {
     localStorage.setItem('store', JSON.stringify(selectAllItems()));
     renderItems(JSON.parse(localStorage.getItem('store')));
-})
+});
 
 clear.addEventListener('click', () => {
     if (clearAllCompleted().length !== 0) {
@@ -105,17 +105,16 @@ clear.addEventListener('click', () => {
         renderItems(JSON.parse(localStorage.getItem('store')));
     }
 
-})
+});
 
 subFilters.addEventListener('click', (event) => {
-    let e = event.target
-    console.log(e);
-    // for (let key of e.children){
-    //     key.children.classList.remove('clearActive');
-    // }
-    console.log(e.parentNode.parentNode.className, e.tagName );
-    // if (e.tagName === 'P'){
-        e.classList.add('clearActive'); /****add tension****/
+    let e = event.target;
+    console.log(subFilters.children );
+    if (e.tagName === 'P'){
+        for (let key of subFilters.children){
+            key.classList.remove('clearActive');
+        }
 
-    // }
-})
+    e.classList.add('clearActive');
+    }
+});
