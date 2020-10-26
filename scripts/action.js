@@ -109,12 +109,55 @@ clear.addEventListener('click', () => {
 
 subFilters.addEventListener('click', (event) => {
     let e = event.target;
-    console.log(subFilters.children );
-    if (e.tagName === 'P'){
-        for (let key of subFilters.children){
+    if (e.tagName === 'P') {
+        for (let key of subFilters.children) {
             key.classList.remove('clearActive');
+            switch (e.className) {
+                case 'All':
+                    localStorage.setItem('state',  'all');
+                    renderFilterState();
+                    break;
+                case 'Active':
+                    localStorage.setItem('state', 'active');
+                    renderFilterState();
+                    break;
+                case 'Completed':
+                    localStorage.setItem('state',  'completed');
+                    renderFilterState();
+                    break;
+            }
         }
-
-    e.classList.add('clearActive');
+        e.classList.add('clearActive');
     }
 });
+
+function renderFilterState(){
+    if (localStorage.getItem('state') === null) {
+        renderItems(JSON.parse(localStorage.getItem('store')));
+    } else {
+        switch (localStorage.getItem('state')) {
+            case 'all':
+                renderItems(JSON.parse(localStorage.getItem('store')));
+                break;
+            case 'active':
+                let store = JSON.parse(localStorage.getItem('store'));
+                let boolean = store.filter(item => item.checked === false);
+                if (boolean.length < 1){
+                    itemsWrapper.innerHTML = '';
+                } else {
+                    renderItems(boolean);
+                }
+                break;
+            case 'completed':
+                let store1 = JSON.parse(localStorage.getItem('store'));
+                let boolean1 = store1.filter(item => item.checked === true);
+                if (boolean1.length < 1){
+                    itemsWrapper.innerHTML = '';
+                } else {
+                    renderItems(boolean1);
+                }
+
+                break;
+        }
+    }
+}

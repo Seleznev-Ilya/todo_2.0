@@ -1,7 +1,27 @@
+
 if (localStorage.getItem('store') !== null) {
     changeArrowToDoShow();
-    renderItems(JSON.parse(localStorage.getItem('store')));
+    if (localStorage.getItem('state') === null) {
+        renderItems(JSON.parse(localStorage.getItem('store')));
+    } else {
+        switch (localStorage.getItem('state')) {
+            case 'all':
+                renderItems(JSON.parse(localStorage.getItem('store')));
+                break;
+            case 'active':
+                let store = JSON.parse(localStorage.getItem('store'));
+                let boolean = store.filter(item => item.checked === false);
+                renderItems(boolean);
+                break;
+            case 'completed':
+                let store1 = JSON.parse(localStorage.getItem('store'));
+                let boolean1 = store1.filter(item => item.checked === true);
+                renderItems(boolean1);
+                break;
+        }
+    }
 
+    console.log(localStorage.getItem('state'));
 }
 
 function renderItems(storeValue) {
