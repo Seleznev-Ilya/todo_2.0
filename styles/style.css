@@ -52,7 +52,7 @@ p, .card-p{
     cursor: pointer;
 }
 .clear:hover{
-    padding-bottom: 0;
+    padding-bottom: 2px;
     border-bottom: 2px solid rgba(0,0,0,.2);
 }
 .subFilters  p.clearActive{
@@ -67,7 +67,7 @@ p, .card-p{
         margin: 10px;
     }
     .subFilters, .filters{
-        line-height: 1px;
+        /*line-height: 1px;*/
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
