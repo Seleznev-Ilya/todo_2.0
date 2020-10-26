@@ -9,7 +9,6 @@ let numItems = document.querySelector('.numItems');
 let subFilters = document.querySelector('.subFilters');
 
 
-
 function getStoreValue() { //get and add first new one item
     setStoreArr();
     return JSON.parse(localStorage.getItem('store'));
@@ -94,11 +93,11 @@ function selectAllItems() {
     let boolean = store.find(item => item.checked === false);
     if (boolean) {
         store.forEach((item) => {
-            if (item.checked === false){
+            if (item.checked === false) {
                 item.checked = true;
             }
         });
-        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) !== searchNumberOfItems(false)){
+        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) !== searchNumberOfItems(false)) {
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
@@ -106,11 +105,11 @@ function selectAllItems() {
 
     } else {
         store.forEach((item) => {
-            if (item.checked === true){
+            if (item.checked === true) {
                 item.checked = false;
             }
         });
-        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) === searchNumberOfItems(false)){
+        if (searchNumberOfItems(false) !== 0 || searchNumberOfItems(false) === searchNumberOfItems(false)) {
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
@@ -119,15 +118,18 @@ function selectAllItems() {
 
     return store;
 }
-function numberItemsShow(){
+
+function numberItemsShow() {
     numItems.innerText = searchNumberOfItems(false);
 }
-function clearAllCompleted(){
+
+function clearAllCompleted() {
     return searchNumberOfItems(true)
 }
-function searchNumberOfItems(state){
+
+function searchNumberOfItems(state) {
     let store = JSON.parse(localStorage.getItem('store'));
-    if (state){
+    if (state) {
         let boolean = store.filter(item => item.checked === false);
         return boolean;
     } else {

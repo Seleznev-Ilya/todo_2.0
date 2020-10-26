@@ -114,7 +114,7 @@ subFilters.addEventListener('click', (event) => {
             key.classList.remove('clearActive');
             switch (e.className) {
                 case 'All':
-                    localStorage.setItem('state',  'all');
+                    localStorage.setItem('state', 'all');
                     renderFilterState();
                     break;
                 case 'Active':
@@ -122,7 +122,7 @@ subFilters.addEventListener('click', (event) => {
                     renderFilterState();
                     break;
                 case 'Completed':
-                    localStorage.setItem('state',  'completed');
+                    localStorage.setItem('state', 'completed');
                     renderFilterState();
                     break;
             }
@@ -131,7 +131,7 @@ subFilters.addEventListener('click', (event) => {
     }
 });
 
-function renderFilterState(){
+function renderFilterState() {
     if (localStorage.getItem('state') === null) {
         renderItems(JSON.parse(localStorage.getItem('store')));
     } else {
@@ -142,7 +142,7 @@ function renderFilterState(){
             case 'active':
                 let store = JSON.parse(localStorage.getItem('store'));
                 let boolean = store.filter(item => item.checked === false);
-                if (boolean.length < 1){
+                if (boolean.length < 1) {
                     itemsWrapper.innerHTML = '';
                 } else {
                     renderItems(boolean);
@@ -151,12 +151,11 @@ function renderFilterState(){
             case 'completed':
                 let store1 = JSON.parse(localStorage.getItem('store'));
                 let boolean1 = store1.filter(item => item.checked === true);
-                if (boolean1.length < 1){
+                if (boolean1.length < 1) {
                     itemsWrapper.innerHTML = '';
                 } else {
                     renderItems(boolean1);
                 }
-
                 break;
         }
     }
