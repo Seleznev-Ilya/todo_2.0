@@ -1,0 +1,127 @@
+@import "node_modules/normalize.css/normalize.css";
+@import "style.css";
+
+@font-face {
+    font-family: "ubunto r";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+    font-family: "ubunto i";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Ubuntu-Italic.ttf");
+}
+
+@font-face {
+    font-family: "ubunto l";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Ubuntu-Light.ttf");
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h1, h2, h3, p {
+    font-family: 'ubunto r';
+}
+
+/*HEADER*/
+header {
+    margin-top: 5%;
+}
+
+/*INPUT*/
+input {
+    border: 2px solid transparent;
+    padding: 1px;
+    width: 100%;
+    font-size: 25px;
+    font-family: 'ubunto i';
+}
+
+input:focus {
+    border: 2px solid transparent;
+    padding: 1px;
+}
+
+input::placeholder {
+    color: lightgrey;
+    opacity: .4;
+}
+
+/*ICONS*/
+.todo-arrow {
+    margin-right: 5px;
+    opacity: 0;
+}
+
+.todo-arrow i {
+    font-size: 33px;
+    padding: 1px;
+}
+
+.card-cross, .checkbox {
+    margin: auto 10px auto 5px;
+}
+
+.card-cross i {
+    opacity: 0;
+    font-size: 17px;
+    padding: 1px;
+}
+
+.card:hover .card-cross i {
+    opacity: 1;
+}
+
+.checkbox i {
+    font-size: 26px;
+}
+
+i {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.item {
+    overflow: hidden;
+}
+
+.item input {
+    box-shadow: inset 0 0 4px 4px rgba(0, 0, 0, .2);
+    font-size: 16px;
+    font-family: 'ubunto r';
+    margin: 0 0 0 30px;
+    min-height: 44px;
+    width: -webkit-fill-available;
+    padding-left: 8px;
+}
+
+*:focus {
+    outline: none;
+}
+
+.transition {
+    transition: .7s ease;
+}
+
+.shadowDown {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 2px;
+}
+
+.hide {
+    display: none;
+}
+
+span {
+    font-weight: bold;
+}

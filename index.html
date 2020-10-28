@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="img/q.png" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="styles/mainStyle.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name = "viewport">
+    <title>todoshka :)</title>
+</head>
+<body>
+<header>
+    <h1>Todo list</h1>
+</header>
+<section class="main">
+    <div class="todo">
+        <div class="todo-arrow">
+            <div class="arrow-wrapper "><i class='fas fa-clone'></i></div>
+            <div class="arrow-wrapper hide"><i class='far fa-clone'></i></div>
+        </div>
+        <form id="todo" onsubmit="enterToDO();return false">
+            <input type="text" placeholder="What need to be done?" id="todo-input">
+        </form>
+    </div>
+    <div class="items-wrapper">
+    </div>
+    <div class="filters hide">
+        <p><span class="numItems">0</span> items left</p>
+        <div class="subFilters">
+                <p class="All">All</p>
+                <p class="Active">Active</p>
+                <p class="Completed">Completed</p>
+        </div>
+        <p class="clear">Clear completed</p>
+    </div>
+
+</section>
+<script src="scripts/Store.js"></script>
+
+<script src="scripts/elem.js"></script>
+<script src="scripts/Item.js"></script>
+
+<script src="scripts/action.js"></script>
+<script src="scripts/script.js"></script>
+</body>
+</html>
