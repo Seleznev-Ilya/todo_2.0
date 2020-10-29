@@ -1,15 +1,19 @@
 if (store.storeValue !== []) {
     changeArrowToDoShow();
     renderItems(store.storeValue);
+    renderFilterState();
 }
 
 function renderItems(storeValue) {
-
+    let activeState = document.querySelector(`.subFilters .${filter.state}`);
+    activeState.classList.add('clearActive');
     let renderArr = [];
     let number = 0;
     let conditionCheckboxTrue;
     let conditionCheckboxFalse;
     filters.classList.add('hide');
+
+
     changeArrowToDoHide();
     try {
         if (storeValue.length !== 0) {

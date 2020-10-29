@@ -1,8 +1,8 @@
+
 function enterToDO() {
     if (todoValue.value.trim() !== '') {
 
         changeArrowToDoShow();
-
         store.storeValue = new Item();
         renderItems(store.storeValue);
     }
@@ -42,24 +42,26 @@ subFilters.addEventListener('click', (event) => {
     if (e.tagName === 'P') {
         for (let key of subFilters.children) {
             key.classList.remove('clearActive');
+
             switch (e.className) {
-                case 'All':
-                    localStorage.setItem('state', 'all');
+                case 'all':
+                    filter.state = 'all';
                     renderFilterState();
                     break;
-                case 'Active':
-                    localStorage.setItem('state', 'active');
+                case 'active':
+                    filter.state = 'active';
                     renderFilterState();
                     break;
-                case 'Completed':
-                    localStorage.setItem('state', 'completed');
+                case 'completed':
+                    filter.state = 'completed';
                     renderFilterState();
                     break;
             }
+
         }
         e.classList.add('clearActive');
     }
-});//todo ------------+
+});//todo
 
 function swapCardToInput(e) {
     let inputItem = document.querySelector(`.${Object.keys(e.dataset)[0]}`);
@@ -105,16 +107,14 @@ function deleteItem(e) {
 }
 
 function renderFilterState() {
-    if (localStorage.getItem('state') === null) {
-        renderItems(JSON.parse(localStorage.getItem('store')));
-    } else {
-        switch (localStorage.getItem('state')) {
+
+
+        switch (filter.state) {
             case 'all':
-                renderItems(JSON.parse(localStorage.getItem('store')));
+                renderItems(store.storeValue);
                 break;
             case 'active':
-                let store = JSON.parse(localStorage.getItem('store'));
-                let boolean = store.filter(item => item.checked === false);
+                let boolean = store.storeValue.filter(item => item.checkBox === false);
                 if (boolean.length < 1) {
                     itemsWrapper.innerHTML = '';
                 } else {
@@ -122,8 +122,7 @@ function renderFilterState() {
                 }
                 break;
             case 'completed':
-                let store1 = JSON.parse(localStorage.getItem('store'));
-                let boolean1 = store1.filter(item => item.checked === true);
+                let boolean1 = store.storeValue.filter(item => item.checkBox === true);
                 if (boolean1.length < 1) {
                     itemsWrapper.innerHTML = '';
                 } else {
@@ -131,7 +130,7 @@ function renderFilterState() {
                 }
                 break;
         }
-    }
+
 }//todo --------------+
 
 function changeArrowToDoShow() {

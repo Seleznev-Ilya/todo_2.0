@@ -7,6 +7,7 @@ let filters = document.querySelector('.filters');
 let clear = document.querySelector('.clear');
 let numItems = document.querySelector('.numItems');
 let subFilters = document.querySelector('.subFilters');
+
 // EventEmmiter JS***
 
 // const store = new Store()
@@ -26,12 +27,12 @@ class Store {
 
     sync(key = false) {
         if (!key) {
-            if (localStorage.getItem('store') !== null) {
-                this.arrStore = JSON.parse(localStorage.getItem('store'));
+            if (localStorage.getItem(Store.local) !== null) {
+                this.arrStore = JSON.parse(localStorage.getItem(Store.local));
             }
         } else {
             if (this.arrStore.length !== 0) {
-                localStorage.setItem('store', JSON.stringify(this.arrStore));
+                localStorage.setItem(Store.local, JSON.stringify(this.arrStore));
             } else {
                 delete localStorage.store;
             }
@@ -51,7 +52,6 @@ class Store {
         }
         this.sync(true);
     }
-
 
     addItem() {
         this.sync();
@@ -130,6 +130,41 @@ class Store {
     };
 }
 
+Store.local = 'store';
+
+class Filter {
+    constructor(getStore = 'all') {
+        this._state = getStore;
+    }
+
+    sync(boolean = true){
+
+            if (localStorage.getItem(Filter.local) !== null) {
+
+                if (boolean){
+                    this._state = JSON.parse(localStorage.getItem(Filter.local));
+                } else {
+                    localStorage.setItem(Filter.local, JSON.stringify(this._state));
+                }
+
+            } else {
+                localStorage.setItem(Filter.local, JSON.stringify(this._state));
+            }
+
+    }
+
+    set state(param) {
+        this._state = param;
+        filter.sync(false);
+    };
+
+    get state() {
+        return this._state;
+    };
+}
+
+Filter.local = 'filter';
+
 class Item {
     constructor(value = getValueFromToDo()) {
         this.id = new Date().getTime();
@@ -141,6 +176,8 @@ class Item {
 let store = new Store();
 store.sync();
 
+let filter = new Filter();
+filter.sync();
 function getValueFromToDo() {
     let valueToDo = todoValue.value.trim();
     todoValue.value = '';
