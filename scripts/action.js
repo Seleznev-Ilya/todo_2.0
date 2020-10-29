@@ -35,6 +35,7 @@ arrow.addEventListener('click', () => {
 clear.addEventListener('click', () => {
     store.clearSelected();
     renderItems(store.storeValue);
+    renderFilterState();
 });
 
 subFilters.addEventListener('click', (event) => {
