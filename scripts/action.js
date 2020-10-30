@@ -1,40 +1,30 @@
-
 function enterToDO() {
     if (todoValue.value.trim() !== '') {
 
         changeArrowToDoShow();
         store.storeValue = new Item();
         renderItems(store.storeValue);
+        renderFilterState();
+
     }
 }
 
 
-itemsWrapper.addEventListener('click', function (event) {
-    let e = event.target;
-    let target = e.parentNode.firstElementChild.id.slice(e.parentNode.firstElementChild.id.lastIndexOf('x') + 1);
-    if (target.trim() !== '') {
-        store.switchItemCheckbox(target - 1);
-    }
-    switchCheckbox(e);
-    deleteItem(e);
-    numberItemsShow();
-});
-
 itemsWrapper.addEventListener('dblclick', function (event) {
     let e = event.target;
     if (e.className === 'card-p') {
-        swapCardToInput(e);
+        emitter.emit('event:swapCardToInput', {event: e});
     }
+
 });
 
 arrow.addEventListener('click', () => {
-    store.selectAllCheckbox();
-    renderItems(store.storeValue);
+    emitter.emit('event:selectAllCheckbox');
 });
+
 
 clear.addEventListener('click', () => {
     store.clearSelected();
-    renderItems(store.storeValue);
     renderFilterState();
 });
 
@@ -62,77 +52,57 @@ subFilters.addEventListener('click', (event) => {
         }
         e.classList.add('clearActive');
     }
-});//todo
+});
 
-function swapCardToInput(e) {
-    let inputItem = document.querySelector(`.${Object.keys(e.dataset)[0]}`);
-    let card = document.getElementById(`${e.id}`);
 
-    inputItem.classList.toggle('hide');
-    inputItem.focus();
-    card.parentNode.classList.toggle('hide');
+itemsWrapper.addEventListener('click', function (event) {
+    let e = event.target;
+    let target = e.parentNode.parentNode.parentNode.firstElementChild.id;
+    let checkBoxImg = document.querySelector(`.label${target}`);
 
-    inputItem.addEventListener('keydown', function (event) {
-        if (event.code === 'Enter') {
-            inputItem.onblur();
-        }
-    });
-
-    inputItem.onblur = function () {
-        let target = inputItem.className.slice(inputItem.className.lastIndexOf('t') + 1);
-        let inputNewValue = inputItem.value;
-        store.editedItem(target, inputNewValue);
-        inputItem.classList.toggle('hide');
-        card.parentNode.classList.toggle('hide');
-        renderItems(store.storeValue);
-    }
-}
-
-function switchCheckbox(e) {
     try {
-        let condition = e.parentNode.firstElementChild.nextElementSibling.children;
-        if (e.parentNode.className === "checkbox") {
-            for (let key of condition) {
-                key.classList.toggle('hide');
-            }
+        for (let key of checkBoxImg.children) {
+            key.classList.toggle('hide');
+            renderFilterState()
         }
     } catch {
     }
-}
-
-function deleteItem(e) {
-    if (e.parentNode.className === "card-cross") {
-        store.clearItem(Object.keys(e.parentNode.dataset)[0]);
-        renderItems(store.storeValue);
+    if (e.parentNode.className === 'card-cross') {
+        store.clearItem(`${Object.keys(e.parentNode.dataset)[0]}`);
+        renderFilterState()
     }
-}
+    console.log(target.trim());
+    if (target.trim() !== '') {
+        store.switchItemCheckbox(target);
+    }
+});
 
 function renderFilterState() {
 
 
-        switch (filter.state) {
-            case 'all':
-                renderItems(store.storeValue);
-                break;
-            case 'active':
-                let boolean = store.storeValue.filter(item => item.checkBox === false);
-                if (boolean.length < 1) {
-                    itemsWrapper.innerHTML = '';
-                } else {
-                    renderItems(boolean);
-                }
-                break;
-            case 'completed':
-                let boolean1 = store.storeValue.filter(item => item.checkBox === true);
-                if (boolean1.length < 1) {
-                    itemsWrapper.innerHTML = '';
-                } else {
-                    renderItems(boolean1);
-                }
-                break;
-        }
+    switch (filter.state) {
+        case 'all':
+            renderItems(store.storeValue);
+            break;
+        case 'active':
+            let boolean = store.storeValue.filter(item => item.checkBox === false);
+            if (boolean.length < 1) {
+                itemsWrapper.innerHTML = '';
+            } else {
+                renderItems(boolean);
+            }
+            break;
+        case 'completed':
+            let boolean1 = store.storeValue.filter(item => item.checkBox === true);
+            if (boolean1.length < 1) {
+                itemsWrapper.innerHTML = '';
+            } else {
+                renderItems(boolean1);
+            }
+            break;
+    }
 
-}//todo --------------+
+}
 
 function changeArrowToDoShow() {
     arrow.style.opacity = '1';

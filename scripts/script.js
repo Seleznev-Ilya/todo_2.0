@@ -31,17 +31,18 @@ function renderItems(storeValue) {
                 }
 
                 let item = `
-        <div class="item item${number}">
+        <div class="item item${number} id${key.id}">
         
         <form onSubmit="return false;" >
-              <input type="text" value="${key.value}" class="input${number} hide ">
+
+              <input type="text" value="${key.value}" data-${key.id}   class="input${key.id}   hide ">
         </form>
             
             <div class="card shadowDown">
                 <div class="checkbox" data-${number}>
            
-                <input type="checkbox" id="checkbox${number}" checked>
-                  <label class="${number}" for="checkbox${number}">
+                <input type="checkbox" id="${key.id}" checked>
+                  <label class="label${key.id}" for="checkbox${number}" data-${key.id}>
                   
                        <span ${conditionCheckboxTrue}>
                           <i class="far fa-check-circle"></i>
@@ -52,9 +53,10 @@ function renderItems(storeValue) {
                  </label>
                 </div>
                 
-                 <div class="card-p"  id="card-p${number}" data-input${number}><p>${key.value}</p></div>
+                 <div class="card-p"  id="card-p${key.id}" data-${key.id}><p>${key.value}</p></div>
+
                  
-                 <div class="card-cross" data-${number}>
+                 <div class="card-cross" data-${key.id}>
                     <i class="fa fa-close"></i>
                  </div>
             </div>

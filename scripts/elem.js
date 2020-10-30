@@ -46,10 +46,18 @@ class Store {
 
     editedItem(key, itemValue) {
         this.sync();
-        this.arrStore[key - 1].value = itemValue;
-        if (this.arrStore[key - 1].value === '') {
-            this.clearItem(key);
-        }
+        try {
+            for (let keyIn of this.arrStore){
+                if (keyIn.id === +key){
+
+                    keyIn.value = itemValue;
+                    if (keyIn.value === '') {
+                        this.clearItem(key);
+                    }
+                }
+            }
+
+        } catch {}
         this.sync(true);
     }
 
@@ -66,9 +74,15 @@ class Store {
 
     clearItem(key) {
         this.sync();
-        this.arrStore.splice(key - 1, 1);
-        if (this.arrStore.length === 0) {
-            this.clearAll();
+        console.log(+key);
+
+        for (let keyIn in this.arrStore){
+            if (this.arrStore[keyIn].id === +key){
+                this.arrStore.splice(keyIn, 1);
+                if (this.arrStore.length === 0) {
+                    this.clearAll();
+                }
+            }
         }
         this.sync(true);
     }
@@ -116,7 +130,11 @@ class Store {
 
     switchItemCheckbox(key) {
         this.sync();
-        this.arrStore[key].checkBox = this.arrStore[key].checkBox !== true;
+        for (let keyIn of this.arrStore){
+            if (keyIn.id === +key){
+                keyIn.checkBox = keyIn.checkBox !== true;
+            }
+        }
         this.sync(true);
     }
 
@@ -137,19 +155,19 @@ class Filter {
         this._state = getStore;
     }
 
-    sync(boolean = true){
+    sync(boolean = true) {
 
-            if (localStorage.getItem(Filter.local) !== null) {
+        if (localStorage.getItem(Filter.local) !== null) {
 
-                if (boolean){
-                    this._state = JSON.parse(localStorage.getItem(Filter.local));
-                } else {
-                    localStorage.setItem(Filter.local, JSON.stringify(this._state));
-                }
-
+            if (boolean) {
+                this._state = JSON.parse(localStorage.getItem(Filter.local));
             } else {
                 localStorage.setItem(Filter.local, JSON.stringify(this._state));
             }
+
+        } else {
+            localStorage.setItem(Filter.local, JSON.stringify(this._state));
+        }
 
     }
 
@@ -178,6 +196,37 @@ store.sync();
 
 let filter = new Filter();
 filter.sync();
+
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+
+    emit(eventName, data) {
+        const event = this.events[eventName];
+        if( event ) {
+            event.forEach(fn => {
+                fn.call(null, data);
+            });
+        }
+    }
+
+    on(eventName, fn) {
+        if(!this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+
+        this.events[eventName].push(fn);
+        return () => {
+            this.events[eventName] = this.events[eventName].filter(eventFn => fn !== eventFn);
+        }
+    }
+
+
+}
+
+let emitter = new EventEmitter();
+
 function getValueFromToDo() {
     let valueToDo = todoValue.value.trim();
     todoValue.value = '';
