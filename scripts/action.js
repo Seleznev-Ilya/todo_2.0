@@ -45,8 +45,9 @@ function renderFilterState() {
             break;
         case 'active':
             let isAnyCheckFalse = store.storeValue.filter(item => item.checkBox === false);
-            if (isAnyCheckFalse.length < 1) {
+            if (isAnyCheckFalse.length < 1 && store.storeValue.length) {
                 itemsWrapper.innerHTML = '';
+                filters.classList.remove('hide');
             } else {
                 renderItems(isAnyCheckFalse);
             }
