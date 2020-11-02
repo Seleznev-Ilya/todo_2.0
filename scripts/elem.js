@@ -186,13 +186,6 @@ class Item {
         this.checkBox = false;
     }
 }
-
-let store = new Store();
-store.sync();
-
-let filter = new Filter();
-filter.sync();
-
 class EventEmitter {
     constructor() {
         this.events = {};
@@ -218,6 +211,14 @@ class EventEmitter {
         }
     }
 }
+
+let store = new Store();
+store.sync();
+
+let filter = new Filter();
+filter.sync();
+
+
 
 let emitter = new EventEmitter();
 

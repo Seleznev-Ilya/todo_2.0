@@ -1,6 +1,5 @@
 if (store.storeValue !== []) {
     changeArrowToDoShow();
-    renderItems(store.storeValue);
     renderFilterState();
 }
 
