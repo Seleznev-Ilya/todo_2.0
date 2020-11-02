@@ -8,7 +8,7 @@ let clear = document.querySelector('.clear');
 let numItems = document.querySelector('.numItems');
 let subFilters = document.querySelector('.subFilters');
 
-// EventEmmiter JS***
+/*// EventEmmiter JS***
 
 // const store = new Store()
 // const item = new Item({
@@ -17,7 +17,7 @@ let subFilters = document.querySelector('.subFilters');
 //
 // const newArr = [item]
 //
-// store.addItem(key, newArr)
+// store.addItem(key, newArr)*/
 
 class Store {
     constructor(getStore = []) {
@@ -47,8 +47,8 @@ class Store {
     editedItem(key, itemValue) {
         this.sync();
         try {
-            for (let keyIn of this.arrStore){
-                if (keyIn.id === +key){
+            for (let keyIn of this.arrStore) {
+                if (keyIn.id === +key) {
 
                     keyIn.value = itemValue;
                     if (keyIn.value === '') {
@@ -57,7 +57,8 @@ class Store {
                 }
             }
 
-        } catch {}
+        } catch {
+        }
         this.sync(true);
     }
 
@@ -76,8 +77,8 @@ class Store {
         this.sync();
         console.log(+key);
 
-        for (let keyIn in this.arrStore){
-            if (this.arrStore[keyIn].id === +key){
+        for (let keyIn in this.arrStore) {
+            if (this.arrStore[keyIn].id === +key) {
                 this.arrStore.splice(keyIn, 1);
                 if (this.arrStore.length === 0) {
                     this.clearAll();
@@ -95,11 +96,10 @@ class Store {
 
     selectAllCheckbox() {
         this.sync();
-        let boolean = this.arrStore.find(item => item.checkBox === false);
+        let isAnyCheckFalse = this.arrStore.find(item => item.checkBox === false);
         let condition = arrow.children;
 
-
-        if (boolean) {
+        if (isAnyCheckFalse) {
             this.arrStore.forEach((item) => {
                 if (item.checkBox === false) {
                     item.checkBox = true;
@@ -109,7 +109,6 @@ class Store {
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
-
 
         } else {
             this.arrStore.forEach((item) => {
@@ -121,17 +120,14 @@ class Store {
             for (let key of condition) {
                 key.classList.toggle('hide');
             }
-
-
         }
-
         this.sync(true);
     }
 
     switchItemCheckbox(key) {
         this.sync();
-        for (let keyIn of this.arrStore){
-            if (keyIn.id === +key){
+        for (let keyIn of this.arrStore) {
+            if (keyIn.id === +key) {
                 keyIn.checkBox = keyIn.checkBox !== true;
             }
         }
@@ -155,11 +151,11 @@ class Filter {
         this._state = getStore;
     }
 
-    sync(boolean = true) {
+    sync(isState = true) {
 
         if (localStorage.getItem(Filter.local) !== null) {
 
-            if (boolean) {
+            if (isState) {
                 this._state = JSON.parse(localStorage.getItem(Filter.local));
             } else {
                 localStorage.setItem(Filter.local, JSON.stringify(this._state));
@@ -204,7 +200,7 @@ class EventEmitter {
 
     emit(eventName, data) {
         const event = this.events[eventName];
-        if( event ) {
+        if (event) {
             event.forEach(fn => {
                 fn.call(null, data);
             });
@@ -212,7 +208,7 @@ class EventEmitter {
     }
 
     on(eventName, fn) {
-        if(!this.events[eventName]) {
+        if (!this.events[eventName]) {
             this.events[eventName] = [];
         }
 
@@ -221,8 +217,6 @@ class EventEmitter {
             this.events[eventName] = this.events[eventName].filter(eventFn => fn !== eventFn);
         }
     }
-
-
 }
 
 let emitter = new EventEmitter();
