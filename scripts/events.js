@@ -4,6 +4,7 @@ emitter.on('event:selectAllCheckbox', () => {
 });
 emitter.on('event:clearSelected', () => {
     store.clearSelected();
+    todoValue.value = '';
     renderFilterState();
 });
 emitter.on('event:filterAddClass', data => {
