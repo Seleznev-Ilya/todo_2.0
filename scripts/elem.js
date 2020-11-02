@@ -218,8 +218,6 @@ store.sync();
 let filter = new Filter();
 filter.sync();
 
-
-
 let emitter = new EventEmitter();
 
 function getValueFromToDo() {

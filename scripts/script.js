@@ -4,6 +4,7 @@ if (store.storeValue !== []) {
 }
 
 function renderItems(storeValue) {
+    todoValue.focus();
     let activeState = document.querySelector(`.subFilters .${filter.state}`);
     activeState.classList.add('clearActive');
     let renderArr = [];
